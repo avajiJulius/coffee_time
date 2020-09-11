@@ -1,23 +1,32 @@
 <html>
 <body>
     <div>
-        <form method="post">
-            <input type="text" name="name" placeholder="Введите имя">
-            <input type="text" name="email" placeholder="Введите почту">
-            <button type="submit">Добавить</button>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            <input type="submit" value="Sign Out"/>
         </form>
     </div>
-    <div>Список Пользователей</div>
-    <form method="post" action="filter">
-        <input type="text" name="name">
-        <button type="submit">Найти</button>
-    </form>
-    {{#users}}
     <div>
-        <b>{{id}}</b>
-        <span>{{name}}</span>
-        <b>{{email}}</b>
+        <form method="post">
+            <input type="text" name="productName" placeholder="Enter product name">
+            <input type="text" name="price" placeholder="Enter price">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            <button type="submit">Add</button>
+        </form>
     </div>
-    {{/users}}
+    <div>Product List</div>
+    <form method="post" action="filter">
+        <input type="text" name="productName">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">Search</button>
+    </form>
+    {{#products}}
+    <div>
+        <b>{{productId}}</b>
+        <span>{{productName}}</span>
+        <b>{{price}}</b>
+        <strong>{{ownerName}}</strong>
+    </div>
+    {{/products}}
 </body>
 </html>
